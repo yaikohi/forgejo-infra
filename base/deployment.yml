@@ -20,7 +20,7 @@ spec:
         - containerPort: 3000
         env:
         - name: DB_TYPE
-          value: sqlite3 # or postgres, mysql
+          value: sqlite3
         - name: DB_PATH
           value: /data/forgejo.db
         - name: RUN_USER
@@ -30,4 +30,5 @@ spec:
           mountPath: /data
       volumes:
       - name: forgejo-data
-        emptyDir: {} # consider persistent volumes in a real setup
+        persistentVolumeClaim:
+          claimName: forgejo-data

@@ -5,7 +5,8 @@ resources:
   - namespace.yml
   - deployment.yml
   - service.yml
-  - ingress.yml # Optional, if you need external access
+  - ingress.yml
+  - pvc.yml
 
 # Optional: Patches to customize the deployment
 # patchesStrategicMerge:
