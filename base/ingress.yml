@@ -4,11 +4,15 @@ metadata:
   name: forgejo-ingress
   namespace: forgejo
   annotations:
-    # Add ingress annotations specific to your k3s ingress controller (traefik, nginx, etc.)
-    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.entrypoints: "web, websecure"
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
+  tls:
+  - hosts:
+    - git.o-0.zip
+    secretName: forgejo-tls-secret
   rules:
-  - host: forgejo.example.com # Replace with your domain
+  - host: git.o-0.zip
     http:
       paths:
       - path: /
