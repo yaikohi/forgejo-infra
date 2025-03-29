@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forgejo
+  namespace: forgejo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forgejo
+  template:
+    metadata:
+      labels:
+        app: forgejo
+    spec:
+      containers:
+      - name: forgejo
+        image: codeberg.org/forgejo/forgejo:latest # Use a specific tag in production
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_TYPE
+          value: sqlite3 # or postgres, mysql
+        - name: DB_PATH
+          value: /data/forgejo.db
+        - name: RUN_USER
+          value: git
+        volumeMounts:
+        - name: forgejo-data
+          mountPath: /data
+      volumes:
+      - name: forgejo-data
+        emptyDir: {} # consider persistent volumes in a real setup

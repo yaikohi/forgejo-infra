@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: forgejo-ingress
+  namespace: forgejo
+  annotations:
+    # Add ingress annotations specific to your k3s ingress controller (traefik, nginx, etc.)
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  rules:
+  - host: forgejo.example.com # Replace with your domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: forgejo
+            port:
+              number: 3000
