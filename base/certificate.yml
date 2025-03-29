@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: forgejo-tls-cert
+  namespace: forgejo
+spec:
+  secretName: forgejo-tls-secret  # Name of the secret that will store the certificate.
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - git.o-0.zip
